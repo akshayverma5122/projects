@@ -28,6 +28,6 @@ helm install -n elastic-system  kibana ./eck-kibana-0.15.0.tgz  --set elasticsea
 ```
 6. access kibana.
 ```
-k -n elastic-system expose deployment kibana-eck-kibana-kb --type NodePort --port 5601 --target-port 56001
+k -n elastic-system expose deployment kibana-eck-kibana-kb --type NodePort --port 5601 --target-port 5601
 
 ```

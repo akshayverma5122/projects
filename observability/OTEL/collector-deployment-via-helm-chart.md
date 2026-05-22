@@ -3,41 +3,6 @@
 * we should use the hostMetrics, kubernetesAttributes and kubeletMetrics when otel collector is deployed as daemonsets. 
 * we should use the kubernetesEvents, clusterMetrics when otel collector is deployed as deployment object.
   
-
-
-2. disable the extra component - node exporter, metrics server, alert manager, grafana etc. 
-```
-alertmanager:
-  enabled: false
-grafana:
-  enabled: false
-kubeApiServer:
-  enabled: true
-kubelet:
-  enabled: true
-kubeControllerManager:
-  enabled: true
-coreDns:
-  enabled: true
-kubeEtcd:
-  enabled: true
-kubeScheduler:
-  enabled: true
-kubeProxy:
-  enabled: true
-kubeStateMetrics:
-  enabled: false
-nodeExporter:
-  enabled: false
-prometheus:
-  service:
-    type: NodePort
-```
-3. deploy the prometheus.
-
-```
-helm install my-kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 85.0.3 --values=prom-default-values.yaml
-```
 4. add the otel-collector helm repo and save the default configuration values.
 ```
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
@@ -105,7 +70,7 @@ curl http://localhost:8889/metrics
 ```
 ### collector as daemonset integration with elasticsearch backend
 
-1. install the elasticsearch and kibana [02-ElasticSearch-Kibana-Logstash](cka/04-Logging-and-Monitoring/02-ElasticSearch-Kibana-Logstash.md)
+
 2. customize the otel-collector.
 
 ```

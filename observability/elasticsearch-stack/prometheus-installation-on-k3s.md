@@ -15,5 +15,17 @@ helm show values prometheus-community/kube-prometheus-stack --version 85.0.3 > p
 5. install the prometheus and grafana.
    
 ```
-helm install my-kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 85.0.3 --values=prom-default-values-for-otel.yaml
+helm install my-kube-prometheus-stack ./kube-prometheus-stack-85.0.3.tgz --version 85.0.3 --create-namespace --namespace=prom-system --values=prom-default-values-for-otel.yaml
+```
+6. expose the grafana using nodeport and grab the grafana admin user password.
+
+```
+kubectl -n prom-system expose deployment my-kube-prometheus-stack-grafana \
+  --type=NodePort \
+  --name=grafana-service \
+  --port=80 \
+  --target-port=3000
+```
+```
+kubectl --namespace prom-system get secrets my-kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
 ```

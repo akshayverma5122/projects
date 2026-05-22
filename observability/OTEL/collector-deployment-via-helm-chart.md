@@ -3,13 +3,7 @@
 * we should use the hostMetrics, kubernetesAttributes and kubeletMetrics when otel collector is deployed as daemonsets. 
 * we should use the kubernetesEvents, clusterMetrics when otel collector is deployed as deployment object.
   
-1. add the prometheus helm repo and save the default configuration values. 
 
-```
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm search repo kube-prometheus-stack
-helm show values prometheus-community/kube-prometheus-stack > prom-default-values.yaml
-```
 
 2. disable the extra component - node exporter, metrics server, alert manager, grafana etc. 
 ```
@@ -25,8 +19,6 @@ kubeControllerManager:
   enabled: true
 coreDns:
   enabled: true
-kubeDns:
-  enabled: false
 kubeEtcd:
   enabled: true
 kubeScheduler:

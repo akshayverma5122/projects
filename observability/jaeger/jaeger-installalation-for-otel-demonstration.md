@@ -11,3 +11,4 @@ export POD_NAME=$(kubectl get pods --namespace jaeger-system -l "app.kubernetes.
 ```
 kubectl port-forward --namespace jaeger-system $POD_NAME 16686:16686 --address 0.0.0.0
 ```
+

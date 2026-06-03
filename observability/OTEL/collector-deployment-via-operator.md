@@ -13,8 +13,8 @@ admissionWebhooks:
 ```
 
 ```
-kubectl create namespace opentelemetry
-helm -n opentelemetry install otel-operator open-telemetry/opentelemetry-operator  --values=otel-operator-default-values.yaml
+ helm -n opentelemetry install otel-operator open-telemetry/opentelemetry-operator  --create-namespace --values=otel-operator-de
+fault-values.yaml 
 kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-operator"
 ```
 ### otel collector deployment 

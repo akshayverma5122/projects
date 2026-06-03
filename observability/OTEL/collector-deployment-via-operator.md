@@ -59,3 +59,10 @@ kubectl run golang-alpine   --image=golang:1.25-alpine   --restart=Never   -- sl
 k exec -it golang-alpine -- /bin/sh
 go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest
 ```
+```
+telemetrygen traces \
+  --otlp-insecure \
+  --otlp-endpoint otel-collector-collector.opentelemetry.svc.cluster.local:4317 \
+  --service test-service \
+  --traces 10
+```

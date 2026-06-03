@@ -25,6 +25,7 @@ kind: OpenTelemetryCollector
 metadata:
   name: otel-collector
 spec:
+  mode: daemonset
   config:
     receivers:
       otlp:

@@ -24,6 +24,7 @@ apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: otel-collector
+  namespace: opentelemetry
 spec:
   mode: daemonset
   config:
@@ -42,13 +43,16 @@ spec:
 
     exporters:
       debug: {}
-
+      otlp_grpc/jaeger:
+        endpoint: my-jaeger.jaeger-system.svc.cluster.local:4317
+        tls:
+          insecure: true 
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [memory_limiter]
-          exporters: [debug]
+          exporters: [debug, otlp_grpc/jaeger]
 ```
 ```
 kubectl create -f otel-collector.yaml -n opentelemetry

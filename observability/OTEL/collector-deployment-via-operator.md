@@ -52,5 +52,9 @@ spec:
 ```
 kubectl create -f otel-collector.yaml -n opentelemetry
 ```
+```
+kubectl run golang-alpine   --image=golang:1.25-alpine   --restart=Never   -- sleep infinity
+k exec -it golang-alpine -- /bin/sh
+go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest
 
 ```

@@ -68,3 +68,5 @@ telemetrygen traces \
 ```
 5. login in the jaeger instance and see the traces under test-service
 
+<img width="959" height="483" alt="image" src="https://github.com/user-attachments/assets/cc14382d-de92-4728-a80b-b9956b9726c9" />
+

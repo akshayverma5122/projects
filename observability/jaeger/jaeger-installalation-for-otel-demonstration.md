@@ -18,3 +18,8 @@ kubectl -n jaeger-system expose deployment my-jaeger --type NodePort --target-po
 http://node-ip:node-port
 ```
 
+helm search repo jaegertracing
+helm pull jaegertracing/jaeger --version 4.8.0
+helm show values jaegertracing/jaeger  > jager-default-values.yaml 
+helm install my-jaeger ./yaml-files/jaeger-4.8.0.tgz --namespace jaeger-system  --
+create-namespace  --version 4.8.0 --values=./yaml-files/jager-default-values.yaml

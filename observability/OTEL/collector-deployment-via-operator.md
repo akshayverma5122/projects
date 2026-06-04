@@ -25,7 +25,7 @@ kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-o
 
 1. deploy the otel-collector using collector crd. 
 ```
-kubectl create -f ./yaml-files/otel-collector.yaml -n opentelemetry
+kubectl -n opentelemetry create -f ./yaml-files/collector-ds-crd.yaml
 ```
 2. run the golang pod and install the telemetrygen in it. 
 ```

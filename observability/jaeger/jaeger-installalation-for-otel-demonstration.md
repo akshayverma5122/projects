@@ -1,14 +1,20 @@
+### jaeger deployment using helm chart
+
+1. add the helm repo for jaeger
 ```
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 ```
+2. install the jaeger. 
 ```
-kubectl create namespace jaeger-system
 helm install my-jaeger jaegertracing/jaeger --namespace jaeger-system  --create-namespace  --version 4.8.0
 ```
+3. expose the jaeger using nodeport.
+
 ```
-export POD_NAME=$(kubectl get pods --namespace jaeger-system -l "app.kubernetes.io/instance=my-jaeger,app.kubernetes.io/component=all-in-one" -o jsonpath="{.items[0].metadata.name}")
+kubectl -n jaeger-system expose deployment my-jaeger --type NodePort --target-port 16686 --port 16686 --name jaeger-ui
 ```
+4. access the jaeger ui.
 ```
-kubectl port-forward --namespace jaeger-system $POD_NAME 16686:16686 --address 0.0.0.0
+http://node-ip:node-port
 ```
 

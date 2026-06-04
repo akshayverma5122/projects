@@ -58,7 +58,7 @@ kubectl run golang-alpine   --image=golang:1.25-alpine   --restart=Never   -- sl
 k exec -it golang-alpine -- /bin/sh
 go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest
 ```
-4. exec into golang pod and send the sample trace to otel collector. 
+4. exec into golang pod and send the sample trace to otel collector using otel endpoint.  
 ```
 telemetrygen traces \
   --otlp-insecure \
@@ -66,5 +66,5 @@ telemetrygen traces \
   --service test-service \
   --traces 10
 ```
-
+5. login in the jaeger instance and see the traces under test-service
 

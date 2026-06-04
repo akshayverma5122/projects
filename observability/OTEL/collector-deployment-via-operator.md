@@ -16,7 +16,7 @@ helm pull open-telemetry/opentelemetry-operator --version=0.114.1
 helm install otel-operator ./yaml-files/opentelemetry-operator-0.114.1.tgz \
   -n opentelemetry \
   --create-namespace \
-  -f ./yaml-files/otel-operator-default-values.yaml
+  --values=./yaml-files/otel-operator-default-values.yaml
 ```
 4. verify the otel operator.
 ```

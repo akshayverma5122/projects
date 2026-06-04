@@ -26,6 +26,7 @@ kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-o
 1. for collector integration with jaeger use below code.
 ```
     receivers:
+## collector will accept the traces, logs and metrics in otel format using this config. 
       otlp:
         protocols:
           grpc:
@@ -33,10 +34,13 @@ kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-o
           http:
             endpoint: 0.0.0.0:4318
     exporters:
+## collecto will transport the traces to jager using this config. 
       otlp_grpc/jaeger:
-        endpoint: my-jaeger.jaeger-system.svc.cluster.local:4317
+        endpoint: my-jaeger.jaeger-system.svc.cluster.local:4317  ## FQDN of jaeger instance
+## this will skip the tls verification  
         tls:
-          insecure: true 
+          insecure: true
+## arranging the receiver and exporter in pipeline 
     service:
       pipelines:
         traces:

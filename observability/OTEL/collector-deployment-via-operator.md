@@ -21,7 +21,28 @@ helm install otel-operator open-telemetry/opentelemetry-operator \
 ```
 kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-operator"
 ```
-### otel collector deployment 
+### otel collector deployment + collector integration with jaeger instance
+
+1. for collector integration with jaeger use below code.
+```
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    exporters:
+      otlp_grpc/jaeger:
+        endpoint: my-jaeger.jaeger-system.svc.cluster.local:4317
+        tls:
+          insecure: true 
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [otlp_grpc/jaeger]
+```
 
 1. deploy the otel-collector using collector crd. 
 ```

@@ -23,7 +23,7 @@ kubectl --namespace opentelemetry get pods -l "app.kubernetes.io/instance=otel-o
 ```
 ### otel collector deployment + collector integration with jaeger instance
 
-1. for collector integration with jaeger use below code.
+1. install the jaeger instance using jaeger-installalation-for-otel-demonstration.md guided steps. for collector integration with jaeger use below code.
 ```
     receivers:
 ## collector will accept the traces, logs and metrics in otel format using this config. 

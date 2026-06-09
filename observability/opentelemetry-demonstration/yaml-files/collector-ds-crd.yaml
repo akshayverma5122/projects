@@ -25,9 +25,15 @@ spec:
         endpoint: my-jaeger.jaeger-system.svc.cluster.local:4317
         tls:
           insecure: true 
+      prometheus:
+        endpoint: 0.0.0.0:8889
+        namespace: otel
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [memory_limiter]
           exporters: [debug, otlp_grpc/jaeger]
+        metrics:
+          receivers: [otlp]
+          exporters: [prometheus]

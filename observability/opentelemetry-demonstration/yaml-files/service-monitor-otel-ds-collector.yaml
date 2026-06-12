@@ -2,21 +2,26 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
+## the below label should matach the release name of kube-prometheus-stack, then only prometheus will discover this servicemonitor
     release: my-kube-prometheus-stack
   name: service-monitor-otel-ds-collector
+## namespace where collector pod is running
   namespace: opentelemetry
 spec:
   endpoints:
   - honorLabels: true
     path: /metrics
+## below portname should match with service otel-collector-collector port name. 
     port: prometheus
     scheme: http
     scrapeTimeout: 30s
   namespaceSelector:
     matchNames:
+  ## namespace where collector pod is running
     - opentelemetry
   selector:
     matchLabels:
+  ## the below label should match with otel collector pod's label which is running as daemonsets. i included operator.opentelemetry.io/collector-service-type: base label as well so that only otel-collector-collector can be selected. 
       app.kubernetes.io/instance: opentelemetry.otel-collector
       app.kubernetes.io/name: otel-collector-collector
       operator.opentelemetry.io/collector-service-type: base

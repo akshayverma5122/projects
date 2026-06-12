@@ -13,6 +13,14 @@ spec:
             endpoint: 0.0.0.0:4317
           http:
             endpoint: 0.0.0.0:4318
+    hostmetrics:
+       collection_interval: 10s
+       scrapers:
+         cpu: {}
+         memory: {}
+         disk: {}
+         filesystem: {}
+         network: {}
     processors:
       memory_limiter:
         check_interval: 1s
@@ -35,5 +43,5 @@ spec:
           processors: [memory_limiter]
           exporters: [debug, otlp_grpc/jaeger]
         metrics:
-          receivers: [otlp]
+          receivers: [hostmetrics, otlp]
           exporters: [prometheus]

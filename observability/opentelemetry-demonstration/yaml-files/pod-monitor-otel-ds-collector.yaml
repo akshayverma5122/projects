@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pod-monitor-otel-ds-collector
+  namespace: opentelemetry
+  labels:
+    release: my-kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - opentelemetry
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: opentelemetry.otel-collector
+      app.kubernetes.io/name: otel-collector-collector
+  podMetricsEndpoints:
+    - port: prometheus
+      path: /metrics
+      scheme: http
+      interval: 15s
+      scrapeTimeout: 10s

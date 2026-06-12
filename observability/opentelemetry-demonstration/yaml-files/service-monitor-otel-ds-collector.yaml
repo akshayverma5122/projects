@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: my-kube-prometheus-stack
+  name: service-monitor-otel-ds-collector
+  namespace: opentelemetry
+spec:
+  endpoints:
+  - honorLabels: true
+    path: /metrics
+    port: prometheus
+    scheme: http
+    scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+    - opentelemetry
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: opentelemetry.otel-collector
+      app.kubernetes.io/name: otel-collector-collector
+      operator.opentelemetry.io/collector-service-type: base

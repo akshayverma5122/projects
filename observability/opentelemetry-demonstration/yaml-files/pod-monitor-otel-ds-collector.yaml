@@ -4,6 +4,7 @@ metadata:
   name: pod-monitor-otel-ds-collector
   namespace: opentelemetry
   labels:
+## the below label should matach the release name of kube-prometheus-stack
     release: my-kube-prometheus-stack
 spec:
   namespaceSelector:
@@ -11,6 +12,7 @@ spec:
       - opentelemetry
   selector:
     matchLabels:
+## the below label should match with otel collector pod's label which is running as daemonsets
       app.kubernetes.io/instance: opentelemetry.otel-collector
       app.kubernetes.io/name: otel-collector-collector
   podMetricsEndpoints:

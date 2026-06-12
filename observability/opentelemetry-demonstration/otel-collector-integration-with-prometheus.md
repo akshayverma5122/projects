@@ -50,3 +50,5 @@ kubectl create -f pod-monitor-otel-ds-collector.yaml
 
 <img width="635" height="344" alt="image" src="https://github.com/user-attachments/assets/b507414f-8aea-4a1d-b674-5233159bf71c" />
 
+<img width="622" height="377" alt="image" src="https://github.com/user-attachments/assets/668b9120-9a02-470d-a4e3-4d0ff78476d4" />
+
